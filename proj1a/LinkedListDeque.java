@@ -78,9 +78,13 @@ public class LinkedListDeque<T> {
 
     public T removeFirst() {
         T returnFirst = sentinel.next.item;
-        if (size == 1) {
-            sentinel.next     = null;
-            sentinel.previous = null;
+        if (size == 0) {
+            size = 0;
+            return null;
+        }
+        else if (size == 1) {
+            sentinel.next     = sentinel;
+            sentinel.previous = sentinel;
             size = size - 1;
         } else {
             sentinel.next = sentinel.next.next;
@@ -94,9 +98,13 @@ public class LinkedListDeque<T> {
 
     public T removeLast() {
         T returnLast = sentinel.previous.item;
-        if (size == 1) {
-            sentinel.next     = null;
-            sentinel.previous = null;
+        if (size == 0) {
+            size = 0;
+            return null;
+        }
+        else if (size == 1) {
+            sentinel.next     = sentinel;
+            sentinel.previous = sentinel;
             size = size - 1;
         } else {
             sentinel.previous = sentinel.previous.previous;
@@ -126,12 +134,12 @@ public class LinkedListDeque<T> {
             return pointer;
         } else {
             sentinel = sentinel.next;
-            return getRecursive(index = index - 1);
+            return getRecursive(index - 1);
         }
     }
 
     public static void main(String[] args) {
-//        LinkedListDeque<Integer> a = new LinkedListDeque<>(444);
+//        LinkedListDeque<Integer> a = new LinkedListDeque<>();
 //        a.addFirst(500);
 //        a.addFirst(200);
 //        a.addFirst(100);
@@ -141,17 +149,17 @@ public class LinkedListDeque<T> {
 //        a.removeLast();
 //
 //        System.out.println("size: " + a.size());
-////        System.out.print(" " + a.removeFirst());
-////        System.out.print(" " + a.removeFirst());
-////        a.addLast(35);
-////        a.addLast(22);
+//        System.out.print(" " + a.removeFirst());
+//        System.out.print(" " + a.removeFirst());
+//        a.addLast(35);
+//        a.addLast(22);
 //        System.out.println(" Non-recurr " + a.get(6));
 //        System.out.println(" Recurr " + a.getRecursive(6));
-////        a.printDeque();
-////        System.out.print(" " + a.get(0));
-////        System.out.print(" " + a.get(1));
-////        System.out.print(" " + a.get(2));
-////        System.out.print(" " + a.get(3));
+//        a.printDeque();
+//        System.out.print(" " + a.get(0));
+//        System.out.print(" " + a.get(1));
+//        System.out.print(" " + a.get(2));
+//        System.out.print(" " + a.get(3));
     }
 
 
