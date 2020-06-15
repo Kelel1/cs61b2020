@@ -78,7 +78,7 @@ public class LinkedListDeque<T> {
 
     public T removeFirst() {
         T returnFirst = sentinel.next.item;
-        if (size == 0) {
+        if (sentinel.next == null) {
             size = 0;
             return null;
         }
@@ -98,7 +98,7 @@ public class LinkedListDeque<T> {
 
     public T removeLast() {
         T returnLast = sentinel.previous.item;
-        if (size == 0) {
+        if (sentinel.previous == null) {
             size = 0;
             return null;
         }
@@ -107,8 +107,15 @@ public class LinkedListDeque<T> {
             sentinel.previous = sentinel;
             size = size - 1;
         } else {
+            Node removeNode = sentinel.previous;
+//            removeNode.next = null;
+//            removeNode.previous = null;
             sentinel.previous = sentinel.previous.previous;
             sentinel.previous.next = sentinel;
+            removeNode.next = null;
+            removeNode.previous = null;
+            removeNode = null;
+
             size = size - 1;
         }
 
@@ -127,19 +134,21 @@ public class LinkedListDeque<T> {
     }
 
     public T getRecursive(int index) {
-        T pointer;
+        T itemToReturn;
+        Node tempPtr = sentinel.next;
 
         if (index == 0) {
-            pointer = sentinel.next.item;
-            return pointer;
+            itemToReturn = sentinel.next.item;
+            return itemToReturn;
         } else {
-            sentinel = sentinel.next;
+            tempPtr = tempPtr.next;
             return getRecursive(index - 1);
         }
     }
 
     public static void main(String[] args) {
 //        LinkedListDeque<Integer> a = new LinkedListDeque<>();
+
 //        a.addFirst(500);
 //        a.addFirst(200);
 //        a.addFirst(100);
@@ -150,6 +159,7 @@ public class LinkedListDeque<T> {
 //
 //        System.out.println("size: " + a.size());
 //        System.out.print(" " + a.removeFirst());
+//        a.removeLast();
 //        System.out.print(" " + a.removeFirst());
 //        a.addLast(35);
 //        a.addLast(22);
